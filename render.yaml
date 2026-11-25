@@ -10,4 +10,16 @@ services:
       - key: SUPABASE_PUBLISHABLE_KEY
         sync: false
       - key: CORS_ORIGIN
-        sync: false
+        value: "*"
+  - type: web
+    name: campusverse-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: printf 'window.CAMPUS_API_URL = "%s";\n' "$CAMPUS_API_URL" > api-config.js
+    staticPublishPath: .
+    envVars:
+      - key: CAMPUS_API_URL
+        fromService:
+          name: events-api
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL

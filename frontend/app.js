@@ -1,5 +1,5 @@
 (() => {
-  let API = (window.CAMPUS_API_URL || localStorage.getItem('campusApiUrl') || 'http://localhost:5000').replace(/\/$/, '');
+  let API = (localStorage.getItem('campusApiUrl') || window.CAMPUS_API_URL || 'http://localhost:5000').replace(/\/$/, '');
   let userId = localStorage.getItem('campusUserId') || '';
   let events = [];
   let registrations = [];
@@ -107,7 +107,7 @@
   $('#settingsForm').addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const url = $('#apiUrl').value.trim().replace(/\/$/, '');
-    API = url || 'http://localhost:5000';
+    API = url || window.CAMPUS_API_URL || 'http://localhost:5000';
     userId = $('#userId').value.trim();
     if (url) localStorage.setItem('campusApiUrl', url); else localStorage.removeItem('campusApiUrl');
     localStorage.setItem('campusUserId', userId);
