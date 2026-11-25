@@ -9,9 +9,27 @@ load_dotenv()
 
 app = Flask(__name__)
 
+supabase_url = os.environ.get("SUPABASE_URL")
+supabase_key = os.environ.get("SUPABASE_PUBLISHABLE_KEY")
+if not supabase_url or not supabase_key:
+    raise RuntimeError(
+        "SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY must be configured."
+    )
+
+
+@app.after_request
+def add_cors_headers(response):
+    # The separately hosted static frontend calls this API from the browser.
+    # Set CORS_ORIGIN to the deployed frontend origin, or leave unset during
+    # development to allow local static servers on another port.
+    response.headers["Access-Control-Allow-Origin"] = os.environ.get("CORS_ORIGIN", "*")
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    return response
+
 supabase: Client = create_client(
-    os.environ.get("SUPABASE_URL"),
-    os.environ.get("SUPABASE_PUBLISHABLE_KEY"),
+    supabase_url,
+    supabase_key,
 )
 
 

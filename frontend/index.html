@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#faf9f7" />
+  <title>CampusVerse · Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,400,0" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="CampusVerse home"><span class="brand-mark"><span class="material-symbols-outlined">auto_awesome</span></span><span><b>CampusVerse</b><small>COLLEGIATE PORTAL</small></span></a>
+    <div class="top-search"><span class="material-symbols-outlined">search</span><input id="search" placeholder="Search events, places, topics…" aria-label="Search events" /></div>
+    <div class="top-actions"><button id="settingsButton" class="icon-button" title="API and user settings"><span class="material-symbols-outlined">tune</span></button><div class="avatar">S</div><span class="profile-name">Student</span></div>
+  </header>
+  <aside class="sidebar">
+    <p class="eyebrow side-label">YOUR CAMPUS</p>
+    <button class="nav-link active" data-page="discover"><span class="material-symbols-outlined">explore</span>Discover events</button>
+    <button class="nav-link" data-page="registrations"><span class="material-symbols-outlined">event_available</span>My registrations <span id="regCount" class="count">0</span></button>
+    <div class="sidebar-note"><span class="material-symbols-outlined">school</span><b>Make campus yours.</b><p>Find the workshops, gatherings and ideas that bring your community together.</p></div>
+    <div class="sidebar-footer"><span class="status-dot"></span><span id="connectionLabel">Connecting to campus</span></div>
+  </aside>
+  <main class="content">
+    <section class="hero">
+      <div class="hero-glow glow-one"></div><div class="hero-glow glow-two"></div>
+      <div class="hero-copy"><span class="kicker"><span class="status-dot"></span> THE CAMPUS CALENDAR</span><h1>Find your next<br /><i>something.</i></h1><p>Good ideas start when people show up. Explore what’s happening across campus.</p></div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="art-center"><span class="material-symbols-outlined">celebration</span></div><span class="art-chip chip-a">✦ learn</span><span class="art-chip chip-b">✷ make</span><span class="art-chip chip-c">↗ meet</span></div>
+      <div class="hero-bottom"><span><b id="eventCount">—</b> opportunities to explore</span><button class="text-button" id="exploreButton">Explore events <span class="material-symbols-outlined">arrow_downward</span></button></div>
+    </section>
+    <section id="eventSection" class="events-section">
+      <div class="section-heading"><div><p class="eyebrow">CURATED FOR YOUR CAMPUS</p><h2 id="pageTitle">Upcoming events</h2></div><div class="view-toggle"><button class="view-button active" data-view="all">All events</button><button class="view-button" data-view="registered">Registered</button></div></div>
+      <div class="filters"><div class="filter-pills" id="filters"><button class="filter-pill active" data-filter="all">Everything</button><button class="filter-pill" data-filter="workshop">Workshops</button><button class="filter-pill" data-filter="social">Community</button><button class="filter-pill" data-filter="talk">Talks &amp; panels</button></div><span id="resultsLabel" class="results-label"></span></div>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <div id="eventsGrid" class="events-grid"><div class="loading"><span class="loader"></span>Finding what’s happening…</div></div>
+    </section>
+    <footer><span class="brand-mini">✦ CampusVerse</span><span>Made for the moments between classes.</span><button id="footerSettings" class="text-button">Connection settings</button></footer>
+  </main>
+  <dialog id="eventDialog" class="event-dialog"><button class="dialog-close icon-button" data-close title="Close"><span class="material-symbols-outlined">close</span></button><div id="dialogContent"></div></dialog>
+  <dialog id="settingsDialog" class="settings-dialog"><form method="dialog" class="dialog-head"><div><p class="eyebrow">PERSONALIZE YOUR SESSION</p><h2>Connection settings</h2></div><button class="icon-button" aria-label="Close"><span class="material-symbols-outlined">close</span></button></form><form id="settingsForm" class="settings-form"><label>API base URL<input id="apiUrl" placeholder="http://localhost:5000" /></label><p class="helper">The address where your Flask API is running. You can also set <code>window.CAMPUS_API_URL</code> before app.js loads.</p><label>Your user ID<input id="userId" required placeholder="Supabase user ID" /></label><p class="helper">Registrations require an existing user ID from your backend’s <code>users</code> table.</p><button class="primary-button" type="submit">Save and connect <span class="material-symbols-outlined">arrow_forward</span></button></form></dialog>
+</body>
+</html>
