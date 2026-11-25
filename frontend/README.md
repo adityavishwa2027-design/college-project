@@ -29,7 +29,7 @@ The event cards read common event field names (`title`/`name`, `description`, `s
 The root `render.yaml` defines the Flask API service. If configuring it manually, use the repository root as the service root directory:
 
 - Build command: `pip install -r requirements.txt`
-- Start command: `gunicorn --chdir backend app:app`
+- Start command: `gunicorn backend.app:app`
 - Required environment variables: `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`
 - Set `CORS_ORIGIN` to the deployed frontend origin.
 
